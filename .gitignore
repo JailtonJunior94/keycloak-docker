@@ -1,1 +1,3 @@
 .docker
+.terraform
+.terraform.lock.hcl

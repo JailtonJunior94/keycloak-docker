@@ -3,3 +3,6 @@ start:
 
 stop:
 	docker-compose down
+
+load-test:
+	artillery run -o artillery-report.json artillery.yaml

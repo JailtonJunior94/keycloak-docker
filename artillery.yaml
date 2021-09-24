@@ -1,0 +1,30 @@
+config:
+  target: "https://keycloak.jailtonjunior.site"
+  phases:
+    - duration: 60
+      arrivalRate: 5
+      rampTo: 10
+      name: Inicialização (Warm up) da aplicação
+    - duration: 90
+      arrivalRate: 12
+      name: Adicionando mais carga
+    - duration: 120
+      arrivalRate: 10
+      name: Diminuindo a carga
+    - duration: 60
+      arrivalRate: 8
+      rampTo: 5
+      name: Finalização
+scenarios:
+  - flow:
+      - post:
+          url: "/auth/realms/ConectCar/protocol/openid-connect/token"
+          headers:
+            content-type: "application/x-www-form-urlencoded"
+          form:
+            grant_type: "client_credentials"
+            client_id: "PocKeyCloak"
+            scope: "openid profile"
+            client_secret: "2940b996-c815-4594-a755-9d2d8fdd3c7d"
+          expect:
+            - statusCode:200
